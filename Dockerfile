@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM openjdk:11-jdk-slim
 
 WORKDIR /opt/schedule
 
