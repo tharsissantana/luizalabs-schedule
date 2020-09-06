@@ -6,7 +6,7 @@ Luizalabs - Schedule
 
 # Prerequisites
  - Docker
- - JVM 8
+ - JVM 11
  
 ## Running
 
@@ -14,7 +14,7 @@ Into the root directory execute:
 
 ```bash
 mvn clean package
-docker-compose up -d
+docker-compose up
 ```
 
 ## Documentation
