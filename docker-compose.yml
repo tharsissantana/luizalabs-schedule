@@ -1,0 +1,45 @@
+version: '3.2'
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: luizalabs
+    ports:
+      - '5432:5432'
+    networks:
+      labs:
+        aliases:
+          - postgres
+  luizalabs-schedule:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: luizalabs-schedule
+    container_name: luizalabs-schedule
+    ports:
+      - '8080:8080'
+    environment:
+      - ADDITIONAL_OPTS=
+      - PROFILE=dev
+    depends_on:
+      - postgres
+    networks:
+      labs:
+        aliases:
+          - schedule
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: postgres@luizalabs.com.br
+      PGADMIN_DEFAULT_PASSWORD: luizalabs
+    ports:
+      - '9090:80'
+    networks:
+      labs:
+        aliases:
+          - pgadmin
+networks:
+  labs:
+    driver: bridge
